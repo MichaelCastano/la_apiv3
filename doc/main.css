@@ -1,0 +1,34 @@
+
+html {
+  color: black;
+  background-color: white;
+  padding-left: 20%;
+  padding-right: 20%;
+  font-family: "Courier";
+}
+
+h3 {
+	padding-left: 10px;
+}
+
+code {
+color: blue;
+background-color: lightgray;
+font-family: "Courier";
+ }
+ 
+.name {
+color: blue;
+font-family: "Courier";
+ 
+ }
+
+.optional {
+color: green !important;
+font-family: "Courier";
+ }
+
+.required {
+color: red !important;
+font-family: "Courier";
+ }

@@ -1,0 +1,6 @@
+*.swp
+*.bak
+*~
+constants.php
+vendor
+
