@@ -54,6 +54,12 @@ $app->group('', function () use ($app) {
         return $response;
     });
 
+    $app->get('/version', function ($request, $response, $args) {
+        $response->getBody()->write('{ "version":"3.1beta", "major":3, "minor":1, "release":"beta" }');
+
+        return $response;
+    });
+
     /* GIGS */
     $app->get('/gigs', function ($request, $response, $args) {
         $gigs = GigQuery::create()->find();
@@ -144,6 +150,61 @@ $app->group('', function () use ($app) {
         return $response;
     });
 
+    $app->post('/venues', function ($request, $response, $args) {
+        $parsedBody = $request->getParsedBody();
+
+        if ($parsedBody == null) {
+            return err_general_error($response, "Provide a body to create a new venue");
+        }
+
+        $venue = new Venue();
+        $venue->fromArray($parsedBody);
+
+        if ($venue->validate()) {
+            $venue->save();
+        } else {
+            return err_general_error($response, "Validation failed");
+        }
+
+        return success($response, "Venue created");
+    });
+
+    $app->put('/venue/{id}', function ($request, $response, $args) {
+        $id = $request->getAttribute('id');
+        $parsedBody = $request->getParsedBody();
+
+        if ($parsedBody == null) {
+            return err_general_error($response, "Provide a body to update a venue");
+        }
+
+        $venue = VenueQuery::create()->findPK($id);
+        if($venue == null){
+            return err_general_error( $response, "Venue Id ".$id." not found");
+        }
+
+        $venue->fromArray($parsedBody);
+
+        if ($venue->validate()) {
+            $venue->save();
+        } else {
+            return err_general_error($response, "Validation failed");
+        }
+
+        return success($response, "Venue updated");
+    });
+
+    $app->delete('/venue/{id}', function ($request, $response, $args) {
+        $id = $request->getAttribute('id');
+
+        $venue = VenueQuery::create()->findPK($id);
+        if($venue == null){
+            return err_general_error( $response, "Venue Id $id not found");
+        }
+        $venue->delete();
+
+        return success($response, "Venue deleted");
+    });
+
     /* USERS */
     $app->get('/users', function ($request, $response, $args) {
         $users = UserQuery::create()->find();
@@ -156,6 +217,22 @@ $app->group('', function () use ($app) {
         return $response;
     });
 
+    $app->get('/users/{id}', function ($request, $response, $args) {
+        $id = $request->getAttribute('id');
+
+        $user = UserQuery::create()->findPK($id);
+        if( $user == null){
+            return err_general_error($response, "User Id $id not found");
+        }
+
+        /* Hide password and salt */
+        $user->setPassword("hidden");
+        $user->setSalt("hidden");
+
+        $response->getBody()->write($user->toJSON());
+
+        return $response;
+    });
 
 })->add('AuthMiddleware')
     ->add('HeaderMiddleware');

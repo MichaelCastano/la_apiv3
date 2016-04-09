@@ -4,15 +4,33 @@
 </head>
 
 <body>
-<h1>Lieber Anders APIv3.0.1beta</h1>
+<h1>Lieber Anders APIv3.1beta</h1>
 
 <h2>Routes</h2>
-<h3>/test</h3>
+<h3>GET /test</h3>
 <p>returns a single <a href="#Testobject">Testobject</a>. This route is for a simple test if the server is
     running. It can also be used to refresh the session token.</p>
 
-<h3>/gigs</h3>
+<h3>GET /version</h3>
+<p>return a <a href="#Versionobject">Versionobject</a> containing the current running version of the api</p>
+
+<h3>GET /gigs</h3>
 <p>returns all gigs. The returned format is a JSON object containing an array named <code>Gigs</code>.</p>
+
+<h3>GET /gigs/{id}</h3>
+<p>returns one gig as JSON Object or an <a href="#Errorobject">Errorobject</a> if there is no gig with id</p>
+
+<h3>POST /gigs</h3>
+<p>creates a new gig with the given content. Returns an <a href="#Errorobject">Errorobject</a> if validation was failed. Eg.
+    because something left or is invalid.</p>
+
+<h3>PUT /gigs/{id}</h3>
+<p>updates a given gig. Returns an <a href="#Errorobject">Errorobject</a> if the content is invalid.</p>
+
+<h3>DELETE /gigs/{id}</h3>
+<p>deletes a gig with the given id. If no gig with the id is found an <a href="#Errorobject">Errorobject</a> is
+    returned.</p>
+
 
 <h2>Objects</h2>
 <p>This API returns additionally to the gigs and venues object some controll object. The are returned on specific kinds
@@ -41,6 +59,10 @@
 <a NAME="Testobject"></a>
 <h3>Testobject</h3>
 <p>is containing a <code>result</code> member writing <code>passed</code> or <code>failed</code>.</p>
+
+<a NAME="Versionobject"></a>
+<h3>Versionobject</h3>
+<p>containes the currently running API version as plaintext and numbers.</p>
 
 <h2>ToDos</h2>
 <ul>
