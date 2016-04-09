@@ -1,84 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <database name="productionSource" defaultIdMethode="native">
-    <table name="gig" phpName="Gig">
-        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"></column>
-        <column name="venue_id" type="integer"></column>
-        <column name="title" required="true" type="varchar" size="255"></column>
-        <column name="date" type="date"></column>
-        <column name="entry" type="decimal" size="3" scale="2"></column>
-        <column name="notes" type="varchar" size="1024"></column>
-        <column name="fix" type="boolean" required="true" defaultValue="0"></column>
-        <foreign-key foreignTable="venue" name="gig_venue_id">
-            <reference local="venue_id" foreign="id"/>
+    <table name="Gig" >
+        <column name="Id" type="integer" required="true" primaryKey="true" autoIncrement="true"></column>
+        <column name="VenueId" type="integer"></column>
+        <column name="Title" required="true" type="varchar" size="255"></column>
+        <column name="Date" type="date"></column>
+        <column name="Entry" type="decimal" size="3" scale="2"></column>
+        <column name="Notes" type="varchar" size="1024"></column>
+        <column name="Fix" type="boolean" required="true" defaultValue="0"></column>
+        <foreign-key foreignTable="Venue" name="GigVenueId">
+            <reference local="VenueId" foreign="Id"/>
+        </foreign-key>
+
+        <behavior name="validate">
+            <parameter name="rule1" value="{column: title, validator: NotNull}" />
+            <parameter name="rule2" value="{column: title, validator: Length, options: {max: 128}}" />
+            <parameter name="rule3" value="{column: fix, validator: NotNull}" />
+        </behavior>
+    </table>
+
+    <table name="Order" >
+        <column name="Id" type="integer" required="true" primaryKey="true" autoIncrement="true"></column>
+        <column name="Name" required="true" type="varchar" size="255"></column>
+        <column name="Street" type="varchar" size="255"></column>
+        <column name="City" type="varchar" size="255"></column>
+        <column name="Mail" type="varchar" size="255"></column>
+        <column name="Telephone" type="varchar" size="255"></column>
+        <column name="Notes" type="varchar" size="255"></column>
+        <column name="Paid" type="boolean" required="true" defaultValue="0"></column>
+        <column name="Shipped" type="boolean" required="true" defaultValue="0"></column>
+    </table>
+    <table name="Product" >
+        <column name="Id" type="integer" required="true" primaryKey="true" autoIncrement="true"></column>
+        <column name="Title" required="true" type="varchar" size="255"></column>
+        <column name="Description" type="varchar" size="255"></column>
+        <column name="Price" type="decimal" size="3" scale="2" required="true"></column>
+    </table>
+    <table name="Orderposition" >
+        <column name="Id" type="integer" required="true" primaryKey="true" autoIncrement="true"></column>
+        <column name="ProductId" required="true" type="integer"></column>
+        <column name="OrderId" required="true" type="integer"></column>
+        <column name="Number" type="integer" required="true"></column>
+        <foreign-key foreignTable="Product" name="OrderpositionProductId">
+            <reference local="ProductId" foreign="Id"/>
+        </foreign-key>
+        <foreign-key foreignTable="Order" name="OrderpositionOrderId">
+            <reference local="OrderId" foreign="Id"/>
         </foreign-key>
     </table>
-    <!-- Tabelle orders -->
-    <table name="order" phpName="Order">
-        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"></column>
-        <column name="name" required="true" type="varchar" size="255"></column>
-        <column name="street" type="varchar" size="255"></column>
-        <column name="city" type="varchar" size="255"></column>
-        <column name="mail" type="varchar" size="255"></column>
-        <column name="telephone" type="varchar" size="255"></column>
-        <column name="notes" type="varchar" size="255"></column>
-        <column name="paid" type="boolean" required="true" defaultValue="0"></column>
-        <column name="shipped" type="boolean" required="true" defaultValue="0"></column>
+    <table name="Venue" >
+        <column name="Id" type="integer" required="true" primaryKey="true" autoIncrement="true"></column>
+        <column name="Name" type="varchar" size="255" required="true"></column>
+        <column name="City" type="varchar" size="255" required="true"></column>
+        <column name="Link" type="varchar" size="255"></column>
+        <column name="Lat" type="decimal" size="8" scale="6"></column>
+        <column name="Lon" type="decimal" size="9" scale="6"></column>
+        <column name="Picture" type="varchar" size="255"></column>
+        <column name="Rating" type="integer" required="true"></column>
+        <column name="Size" type="integer"></column>
+        <column name="Plz" type="integer" required="true"></column>
+        <column name="Address" type="varchar" size="255"></column>
     </table>
-    <table name="product" phpName="Product">
-        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"></column>
-        <column name="title" required="true" type="varchar" size="255"></column>
-        <column name="description" type="varchar" size="255"></column>
-        <column name="price" type="decimal" size="3" scale="2" required="true"></column>
-    </table>
-    <table name="orderposition" phpName="Orderposition">
-        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"></column>
-        <column name="product_id" required="true" type="integer"></column>
-        <column name="order_id" required="true" type="integer"></column>
-        <column name="number" type="integer" required="true"></column>
-        <foreign-key foreignTable="product" name="orderposition_product_id">
-            <reference local="product_id" foreign="id"/>
+    <table name="Contact" >
+        <column name="Id" type="integer" required="true" primaryKey="true" autoIncrement="true"></column>
+        <column name="Name" type="varchar" size="255" required="true"></column>
+        <column name="Mail" type="varchar" size="255"></column>
+        <column name="Telephone" type="varchar" size="255"></column>
+        <column name="Notes" type="varchar" size="1024"></column>
+        <column name="VenueId" type="integer"></column>
+        <column name="GigId" type="integer"></column>
+        <foreign-key foreignTable="Venue" name="ContactVenueId">
+            <reference local="VenueId" foreign="Id"/>
         </foreign-key>
-        <foreign-key foreignTable="order" name="orderposition_order_id">
-            <reference local="order_id" foreign="id"/>
+        <foreign-key foreignTable="Gig" name="ContactGigId">
+            <reference local="GigId" foreign="Id"/>
         </foreign-key>
     </table>
-    <table name="venue">
-        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"></column>
-        <column name="name" type="varchar" size="255" required="true"></column>
-        <column name="city" type="varchar" size="255" required="true"></column>
-        <column name="link" type="varchar" size="255"></column>
-        <column name="lat" type="decimal" size="8" scale="6"></column>
-        <column name="lon" type="decimal" size="9" scale="6"></column>
-        <column name="picture" type="varchar" size="255"></column>
-        <column name="rating" type="integer" required="true"></column>
-        <column name="size" type="integer"></column>
-        <column name="plz" type="integer" required="true"></column>
-        <column name="address" type="varchar" size="255"></column>
-    </table>
-    <table name="contact" phpName="Contact">
-        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"></column>
-        <column name="name" type="varchar" size="255" required="true"></column>
-        <column name="mail" type="varchar" size="255"></column>
-        <column name="telephone" type="varchar" size="255"></column>
-        <column name="notes" type="varchar" size="1024"></column>
-        <column name="venue_id" type="integer"></column>
-        <column name="gig_id" type="integer"></column>
-        <foreign-key foreignTable="venue" name="contact_venue_id">
-            <reference local="venue_id" foreign="id"/>
-        </foreign-key>
-        <foreign-key foreignTable="gig" name="contact_gig_id">
-            <reference local="gig_id" foreign="id"/>
-        </foreign-key>
-    </table>
-    <table name="user" phpName="User">
-        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"></column>
-        <column name="name" type="varchar" size="255" required="true"></column>
-        <column name="username" type="varchar" size="255" required="true"></column>
-        <column name="mail" type="varchar" size="255" required="true"></column>
-        <column name="password" type="varchar" size="255" required="true"></column>
-        <column name="salt" type="varchar" size="255" required="true"></column>
-        <column name="lastLogin" type="timestamp" required="true"></column>
-        <column name="telephone" type="varchar" size="255"></column>
-        <column name="picture" type="varchar" size="5012"></column>
+    <table name="User" >
+        <column name="Id" type="integer" required="true" primaryKey="true" autoIncrement="true"></column>
+        <column name="Name" type="varchar" size="255" required="true"></column>
+        <column name="Username" type="varchar" size="255" required="true"></column>
+        <column name="Mail" type="varchar" size="255" required="true"></column>
+        <column name="Password" type="varchar" size="255" required="true"></column>
+        <column name="Salt" type="varchar" size="255" required="true"></column>
+        <column name="LastLogin" type="timestamp" required="true"></column>
+        <column name="Telephone" type="varchar" size="255"></column>
+        <column name="Picture" type="varchar" size="5012"></column>
     </table>
 </database>

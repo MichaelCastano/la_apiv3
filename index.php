@@ -70,6 +70,61 @@ $app->group('', function () use ($app) {
         return $response;
     });
 
+    $app->post('/gigs', function ($request, $response, $args) {
+        $parsedBody = $request->getParsedBody();
+
+        if ($parsedBody == null) {
+            return err_general_error($response, "Provide a body to create a new gig");
+        }
+
+        $gig = new Gig();
+        $gig->fromArray($parsedBody);
+
+        if ($gig->validate()) {
+            $gig->save();
+        } else {
+            return err_general_error($response, "Validation failed");
+        }
+
+        return success($response, "Gig created");
+    });
+
+    $app->put('/gigs/{id}', function ($request, $response, $args) {
+        $id = $request->getAttribute('id');
+        $parsedBody = $request->getParsedBody();
+
+        if ($parsedBody == null) {
+            return err_general_error($response, "Provide a body to update a gig");
+        }
+
+        $gig = GigQuery::create()->findPK($id);
+        if($gig == null){
+            return err_general_error( $response, "Gig Id ".$id." not found");
+        }
+
+        $gig->fromArray($parsedBody);
+
+        if ($gig->validate()) {
+            $gig->save();
+        } else {
+            return err_general_error($response, "Validation failed");
+        }
+
+        return success($response, "Gig updated");
+    });
+
+    $app->delete('/gigs/{id}', function ($request, $response, $args) {
+        $id = $request->getAttribute('id');
+
+        $gig = GigQuery::create()->findPK($id);
+        if($gig == null){
+            return err_general_error( $response, "Gig Id $id not found");
+        }
+        $gig->delete();
+
+        return success($response, "Gig deleted");
+    });
+
     /* VENUES */
     $app->get('/venues', function ($request, $response, $args) {
         $venues = VenueQuery::create()->find();
@@ -81,6 +136,9 @@ $app->group('', function () use ($app) {
         $id = $request->getAttribute('id');
 
         $venue = VenueQuery::create()->findPK($id);
+        if( $venue == null){
+            return err_general_error($response, "Venue Id $id not found");
+        }
         $response->getBody()->write($venue->toJSON());
 
         return $response;
@@ -99,7 +157,7 @@ $app->group('', function () use ($app) {
     });
 
 
-})  ->add('AuthMiddleware')
+})->add('AuthMiddleware')
     ->add('HeaderMiddleware');
 
 

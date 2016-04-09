@@ -11,11 +11,11 @@ class AuthMiddleware
     {
         /* TODO Resolve logged in User */
         session_start();
-        if (isset($_SESSION['username'])) {
+        //if (isset($_SESSION['username'])) {
             $response = $next($request, $response);
-        } else {
-            $response = err_auth_error($response,"You must login for this feature!");
-        }
+        //} else {
+        //    $response = err_auth_error($response,"You must login for this feature!");
+        //}
         return $response;
     }
 }
