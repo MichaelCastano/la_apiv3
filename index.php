@@ -12,17 +12,18 @@ require_once('vendor/autoload.php');
 require_once('generated-conf/config.php');
 
 // setup Application Parts
-require_once('src/middleware.php');
-require_once('src/utils.php');
-require_once('src/err.php');
+require_once('src/AuthMiddleware.php');
+require_once('src/HeaderMiddleware.php');
+require_once('src/Util.php');
+require_once('src/Err.php');
 
 
 // Create and configure Slim app
 $container = new \Slim\Container;
 $app = new \Slim\App($container);
 
-$container['AuthRequiredMiddleware'] = function ($container) {
-    return new AuthRequiredMiddleware();
+$container['AuthMiddleware'] = function ($container) {
+    return new AuthMiddleware();
 };
 
 $container['HeaderMiddleware'] = function ($container) {
@@ -53,7 +54,7 @@ $app->group('', function () use ($app) {
         return $response;
     });
 
-})->add('AuthRequiredMiddleware')
+})->add('AuthMiddleware')
     ->add('HeaderMiddleware');
 
 

@@ -2,7 +2,6 @@
 *.bak
 *~
 *.idea
-constants.php
 vendor
 propel.yaml
 generated-classes
