@@ -8,7 +8,7 @@
         <column name="entry" type="decimal" size="3" scale="2"></column>
         <column name="notes" type="varchar" size="1024"></column>
         <column name="fix" type="boolean" required="true" defaultValue="0"></column>
-        <foreign-key foreignTable="venue" name="venue_id">
+        <foreign-key foreignTable="venue" name="gig_venue_id">
             <reference local="venue_id" foreign="id"/>
         </foreign-key>
     </table>
@@ -35,10 +35,10 @@
         <column name="product_id" required="true" type="integer"></column>
         <column name="order_id" required="true" type="integer"></column>
         <column name="number" type="integer" required="true"></column>
-        <foreign-key foreignTable="product" name="product_id">
+        <foreign-key foreignTable="product" name="orderposition_product_id">
             <reference local="product_id" foreign="id"/>
         </foreign-key>
-        <foreign-key foreignTable="order" name="order_id">
+        <foreign-key foreignTable="order" name="orderposition_order_id">
             <reference local="order_id" foreign="id"/>
         </foreign-key>
     </table>
@@ -63,10 +63,10 @@
         <column name="notes" type="varchar" size="1024"></column>
         <column name="venue_id" type="integer"></column>
         <column name="gig_id" type="integer"></column>
-        <foreign-key foreignTable="venue" name="venue_id">
+        <foreign-key foreignTable="venue" name="contact_venue_id">
             <reference local="venue_id" foreign="id"/>
         </foreign-key>
-        <foreign-key foreignTable="gig" name="gig_id">
+        <foreign-key foreignTable="gig" name="contact_gig_id">
             <reference local="gig_id" foreign="id"/>
         </foreign-key>
     </table>
