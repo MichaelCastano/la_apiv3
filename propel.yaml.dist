@@ -1,0 +1,22 @@
+# A propel dist file. Overwrite those parameter via propel.yaml file at your needs!
+
+
+propel:
+  database:
+      connections:
+          productionSource:
+              adapter: mysql
+              classname: Propel\Runtime\Connection\DebugPDO
+              dsn: mysql:host=example.com;dbname=db123
+              user: 'user123'
+              password: 'pass123'
+              attributes:
+  runtime:
+      defaultConnection: productionSource
+      connections:
+          - productionSource
+  generator:
+      defaultConnection: productionSource
+      connections:
+          - productionSource
+

@@ -1,6 +1,6 @@
 <?php
 
-require_once('err.php')
+require_once('err.php');
 
 function auth_required(){
   if(! isset($_SESSION['username'])){

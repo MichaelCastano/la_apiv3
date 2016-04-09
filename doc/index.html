@@ -14,6 +14,8 @@
      <li>Implement the header corresponding with the result</li>
    </ul>
    <h2>Changelog</h2>
+   <h3>2016_02_07</h3>
+   Advantages over the last version (apiv2) are of many kinds. A new database structure is used and gives the possibility to extend it for performing more complex analytics. Also the new structure is in general more extenable and contains more information. Seperate tables for venues, contacts and even users are established. The apiv3 is also using the modern design called RESTful to give an easy to learn interface. apiv2 is using only the http GET method to get and to set objects. Changes are made via the GET parameters. In the new version all different kinds of http methods are supported and used! Change are made via the body of the request. Also the implementation is refactored. The database is abstracted with PDO. To implement routes the Slim 3 framework is used. Different functionalities are implement via DI and middleware components which gives a more cleaner codebase. Most parts of the documentation is generated automatically from source files and can be build in html and pdf format. Important function of the codebase are tested via PhpUnittests. The codebase is opensource and public at github. Feel free to write Issues and Bugs it the repository!
    <h3>2016_01_17</h3>
     <ul>
       <li>New design for help page</li>

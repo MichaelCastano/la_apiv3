@@ -1,6 +1,11 @@
 *.swp
 *.bak
 *~
+*.idea
 constants.php
 vendor
+propel.yaml
+generated-classes
+generated-conf
+generated-sql
 

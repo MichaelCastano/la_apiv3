@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="productionSource" defaultIdMethode="native">
+    <table name="gig" phpName="Gig">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"></column>
+        <column name="venue_id" type="integer" ></column>
+        <column name="title" required="true" type="varchar" size="255"></column>
+        <column name="date" type="date"></column>
+        <column name="entry" type="decimal" size="3" scale="2"></column>
+        <column name="otherstuff" type="varchar" size="255"></column>
+        <column name="public" type="boolean"></column>
+        <foreign-key foreignTable="venue" name="venue_id" phpName="Venue" refPhpName="Gig">
+            <reference local="venue_id" foreign="id"/>
+        </foreign-key>
+    </table>
+    <!-- Tabelle orders -->
+    <!--table name="order" phpName="Order">
+      <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"></column>
+      <column name="name"></column>
+      <column name="street"></column>
+      <column name="city"></column>
+      <column name="paid">1</column>
+      <column name="shipped">1</column>
+    </table>
+    <table name="product">
+      <column name="id">5</column>
+      <column name="title">Let's Call It A Day</column>
+      <column name="description">Unser erstes Album von 2011.</column>
+      <column name="price">5.00</column>
+    </table-->
+    <table name="venue">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"></column>
+        <column name="name" type="varchar" size="255" required="true"></column>
+        <column name="city" type="varchar" size="255" required="true"></column>
+        <column name="link" type="varchar" size="255"></column>
+        <column name="lat" type="decimal" size="8" scale="6"></column>
+        <column name="lon" type="decimal" size="9" scale="6"></column>
+        <column name="picture" type="varchar" size="255"></column>
+        <column name="rating" type="integer" required="true"></column>
+        <column name="size" type="integer"></column>
+        <column name="plz" type="integer" required="true"></column>
+        <column name="address" type="varchar" size="255"></column>
+    </table>
+</database>
