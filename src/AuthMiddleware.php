@@ -10,7 +10,10 @@ class AuthMiddleware
     public function __invoke($request, $response, $next)
     {
         /* TODO Resolve logged in User */
+
         session_start();
+
+        /* FIXME Disabled Security */
         //if (isset($_SESSION['username'])) {
             $response = $next($request, $response);
         //} else {

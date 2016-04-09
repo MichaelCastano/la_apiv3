@@ -6,7 +6,35 @@
 <body>
 <h1>Lieber Anders APIv3.1beta</h1>
 
+<h2>General</h2>
+<p>This is the documentation for the Lieber Anders API.</p>
+<h3>Table of contents</h3>
+<ul>
+    <li><a href="#Routes">Routes</a>
+        <ul>
+            <li><a href="#GeneralCommands">GeneralCommands</a></li>
+            <li><a href="#GigCommands">GigCommands</a></li>
+            <li><a href="#VenueCommands">VenueCommands</a></li>
+            <li><a href="#UserCommands">UserCommands</a></li>
+            <li><a href="#ControlCommands">ControlCommands</a></li>
+        </ul>
+    </li>
+    <li><a href="#Objects">Objects</a>
+        <ul>
+            <li><a href="#Errorobject">Errorobject</a></li>
+            <li><a href="#Successobject">Successobject</a></li>
+            <li><a href="#Testobject">Testobject</a></li>
+            <li><a href="#Versionobject">Versionobject</a></li>
+        </ul>
+    </li>
+    <li><a href="#ToDos">ToDos</a></li>
+    <li><a href="#Links">Links</a></li>
+    <li><a href="#Changelog">Changelog</a></li>
+</ul>
+
+<a NAME="Routes"></a>
 <h2>Routes</h2>
+<a NAME="GeneralCommands"></a>
 <h3>GET /test</h3>
 <p>returns a single <a href="#Testobject">Testobject</a>. This route is for a simple test if the server is
     running. It can also be used to refresh the session token.</p>
@@ -14,6 +42,7 @@
 <h3>GET /version</h3>
 <p>return a <a href="#Versionobject">Versionobject</a> containing the current running version of the api</p>
 
+<a NAME="GigCommands"></a>
 <h3>GET /gigs</h3>
 <p>returns all gigs. The returned format is a JSON object containing an array named <code>Gigs</code>.</p>
 
@@ -21,7 +50,8 @@
 <p>returns one gig as JSON Object or an <a href="#Errorobject">Errorobject</a> if there is no gig with id</p>
 
 <h3>POST /gigs</h3>
-<p>creates a new gig with the given content. Returns an <a href="#Errorobject">Errorobject</a> if validation was failed. Eg.
+<p>creates a new gig with the given content. Returns an <a href="#Errorobject">Errorobject</a> if validation was failed.
+    Eg.
     because something left or is invalid.</p>
 
 <h3>PUT /gigs/{id}</h3>
@@ -31,7 +61,45 @@
 <p>deletes a gig with the given id. If no gig with the id is found an <a href="#Errorobject">Errorobject</a> is
     returned.</p>
 
+<a NAME="VenueCommands"></a>
+<h3>GET /venues</h3>
+<p>returns all venues.</p>
 
+<h3>GET /venues/{id}</h3>
+<p>return one venue with the corresponding id. If none is found an <a href="#Errorobject">Errorobject</a> is returned.
+</p>
+
+<h3>POST /venues</h3>
+<p>creates a new venue. If required members left or members are invalid a <a href="#Errorobject">Errorobject</a> is
+    returned.</p>
+
+<h3>PUT /venues/{id}</h3>
+<p>updates a given venue. If members are invalid the request is canceled with an <a href="#Errorobject">Errorobject</a>.
+    If no venue with the corresponding id is found the server is also returning an <a
+            href="#Errorobject">Errorobject</a>.</p>
+
+<h3>DELETE /venues/{id}</h3>
+<p>deletes the venue with the correspondig id. If none is found an <a href="#Errorobject">Errorobject</a> is returned.
+</p>
+
+<a NAME="UserCommands"></a>
+<h3>GET /users</h3>
+<p>returns all users. Password and salt field are hidden.</p>
+
+<h3>GET /users/{id}</h3>
+<p>return one user with the given id. The password and salt field are hidden. If none is found a <a href="#Errorobject">Errorobject</a>
+    is returned.</p>
+
+<a NAME="ControlCommands"></a>
+<h3>POST /control/login</h3>
+<p>is the login command. You should use it to get a session from the server. Send a JSON object with a
+    <code>password</code> and a <code>username</code> member to login. Returns an <a href="#Errorobject">Errorobject</a>
+    if something is wrong. Maybe the credentials.</p>
+
+<h3>GET /control/logout</h3>
+<p>destroys the currently running session.</p>
+
+<a NAME="Objects"></a>
 <h2>Objects</h2>
 <p>This API returns additionally to the gigs and venues object some controll object. The are returned on specific kinds
     of
@@ -62,33 +130,50 @@
 
 <a NAME="Versionobject"></a>
 <h3>Versionobject</h3>
-<p>containes the currently running API version as plaintext and numbers.</p>
+<p>containes the currently running API version as plaintext and numbers. Eg. <code>{ "version":"3.1beta", "major":3,
+    "minor":1, "release":"beta" }</code>. <code>release</code> may be any of <code>release</code>, <code>release-candidate</code>
+    and <code>beta</code></p>
 
+
+<a NAME="ToDos"></a>
 <h2>ToDos</h2>
 <ul>
     <li>Add contacts per venue</li>
     <li>A notes field for notes per gig, venue etc. Only logged in viewable</li>
 </ul>
 
+<a NAME="Links"></a>
+<h2>Links</h2>
+<p>You can find this API on github at: <a href="https://github.com/noppelmax/la_apiv3">https://github.com/noppelmax/la_apiv3</a>.
+    Feel free to write a comment or issue!</p>
+<p>I used 2 importend opensource frameworks to realize this project. There is on one hand the ORM-Framework <a
+        href="http://propelorm.org/">Propel</a>
+    which handles the database connection and abstraction. This give the codebase an enormous boost in neatness. On the
+    other hand there is <a href="http://www.slimframework.com/">Slim</a> a framework which handles the RESTful routes
+    and same middleware parts. This
+    give a very clean user interface in style of the RESTful standard. Thanks to you, guys!</p>
+<p>This API is written for and used by <a href="http://lieber-anders.de/">Lieber Anders</a>.</p>
 
+
+<a NAME="Changelog"></a>
 <h2>Changelog</h2>
 <h3>2016_04_09</h3>
 <ul>
     <li>Implement with the propel orm-framework for better abstraction from database.</li>
-    <li>Implement basic architecture</li>
+    <li>Implement basic architecture and functionality</li>
+    <li>Wrote most documentation for basic functionality</li>
 </ul>
 
 <h3>2016_02_07</h3>
 Advantages over the last version (apiv2) are of many kinds. A new database structure is used and gives the possibility
-to extend it for performing more complex analytics. Also the new structure is in general more extenable and contains
+to extend it for performing more complex analytics. Also the new structure is in general more extendable and contains
 more information. Seperate tables for venues, contacts and even users are established. The apiv3 is also using the
 modern design called RESTful to give an easy to learn interface. apiv2 is using only the http GET method to get and to
 set objects. Changes are made via the GET parameters. In the new version all different kinds of http methods are
-supported and used! Change are made via the body of the request. Also the implementation is refactored. The database is
+supported and used! Changes are made via the body of the request. Also the implementation is refactored. The database is
 abstracted with PDO. To implement routes the Slim 3 framework is used. Different functionalities are implement via DI
-and middleware components which gives a more cleaner codebase. Most parts of the documentation is generated
-automatically from source files and can be build in html and pdf format. Important function of the codebase are tested
-via PhpUnittests. The codebase is opensource and public at github. Feel free to write Issues and Bugs it the repository!
+and middleware components which gives a more cleaner codebase. The codebase is opensource and public at github. Feel
+free to write Issues and Bugs it the repository!
 <h3>2016_01_17</h3>
 <ul>
     <li>New design for help page</li>
