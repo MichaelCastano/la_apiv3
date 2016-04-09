@@ -2,18 +2,18 @@
 This is a api for managing gigs, orders and venues for bands, especially my own band lieber anders!
 
 # Installation
-
+To be written
 
 # Building
-Use 'php composer.phar install' to install all dependencies.
+Use `php composer.phar install` to install all dependencies.
 
-Use 'vendor/bin/propel sql:build' to build sql maps.
+Use `vendor/bin/propel sql:build` to generate sql maps.
 
-Use 'vendor/bin/probel model:build' to build the ORM-Objects.
+Use `vendor/bin/probel model:build` to generate the ORM-Objects.
 
-Use 'vendor/bin/probel config:convert' to build the Database Connection files.
+Use `vendor/bin/probel config:convert` to generate the Database Connection files.
 
-Use 'php composer.phar dump-autoload' to build the autoload scripts.
+Use `php composer.phar dump-autoload` to generate the autoload scripts.
 
 
 # License
