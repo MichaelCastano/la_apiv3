@@ -2,7 +2,7 @@
 function err_auth_error($response, $msg)
 {
     $response = $response->withStatus(403);
-    $response = err_error($response, "auth_error", "Please login to use this feature!");
+    $response = err_error($response, "auth_error", $msg);
 
     return $response;
 }

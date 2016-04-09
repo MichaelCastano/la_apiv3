@@ -6,9 +6,10 @@ function validateDate($date)
     return ctype_digit("$y$m$d") && checkdate($m, $d, $y);
 }
 
-function success($msg)
+function success($response, $msg)
 {
-    die('{"success":"' . $msg . '"}');
+    $response->getBody()->write('{"success":"' . $msg . '"}');
+    return $response;
 }
 
 
