@@ -13,7 +13,6 @@ require_once('generated-conf/config.php');
 
 // setup Application Parts
 require_once('src/middleware.php');
-require_once('src/auth.php');
 require_once('src/utils.php');
 require_once('src/err.php');
 

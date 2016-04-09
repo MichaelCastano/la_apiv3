@@ -1,34 +1,27 @@
 
 html {
-  color: black;
-  background-color: white;
-  padding-left: 20%;
-  padding-right: 20%;
-  font-family: "Courier";
+    color: black;
+    background-color: white;
+    padding-left: 20%;
+    padding-right: 20%;
+    font-family: "Courier";
+}
+
+h2 {
+    width: 100%;
+    background-color: darkgrey;
+    padding-left: 5px;
 }
 
 h3 {
-	padding-left: 10px;
+    width: 100%;
+    background-color: lightgrey;
+    padding-left: 5px;
 }
 
+
 code {
-color: blue;
-background-color: lightgray;
-font-family: "Courier";
- }
- 
-.name {
-color: blue;
-font-family: "Courier";
- 
- }
+    color: darkblue;
+    font-family: "Courier";
+}
 
-.optional {
-color: green !important;
-font-family: "Courier";
- }
-
-.required {
-color: red !important;
-font-family: "Courier";
- }

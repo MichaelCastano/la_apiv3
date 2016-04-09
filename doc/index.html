@@ -1,27 +1,78 @@
 <html>
-  <head>
-  	<link rel="stylesheet" type="text/css" href="main.css">
-  </head>
+<head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
 
-  <body>
-   <h1>Lieber Anders APIv3.0.0 RC</h1>
-   <h2>ToDos</h2>
-   <ul>
-     <li>Get rid of the if-elseif-... horror!</li>
-     <li>Add contacts per venue</li>
-     <li>A notes field for notes per gig, venue etc. Only logged in viewable</li>
-     <li>Implement as RESTful style</li>
-     <li>Implement the header corresponding with the result</li>
-   </ul>
-   <h2>Changelog</h2>
-   <h3>2016_02_07</h3>
-   Advantages over the last version (apiv2) are of many kinds. A new database structure is used and gives the possibility to extend it for performing more complex analytics. Also the new structure is in general more extenable and contains more information. Seperate tables for venues, contacts and even users are established. The apiv3 is also using the modern design called RESTful to give an easy to learn interface. apiv2 is using only the http GET method to get and to set objects. Changes are made via the GET parameters. In the new version all different kinds of http methods are supported and used! Change are made via the body of the request. Also the implementation is refactored. The database is abstracted with PDO. To implement routes the Slim 3 framework is used. Different functionalities are implement via DI and middleware components which gives a more cleaner codebase. Most parts of the documentation is generated automatically from source files and can be build in html and pdf format. Important function of the codebase are tested via PhpUnittests. The codebase is opensource and public at github. Feel free to write Issues and Bugs it the repository!
-   <h3>2016_01_17</h3>
-    <ul>
-      <li>New design for help page</li>
-      <li>Using prepared statements</li>
-      <li>New database structure</li>
-    </ul>
-  </body>
+<body>
+<h1>Lieber Anders APIv3.0.1beta</h1>
+
+<h2>Routes</h2>
+<h3>/test</h3>
+<p>returns a single <a href="#Testobject">Testobject</a>. This route is for a simple test if the server is
+    running. It can also be used to refresh the session token.</p>
+
+<h3>/gigs</h3>
+<p>returns all gigs. The returned format is a JSON object containing an array named <code>Gigs</code>.</p>
+
+<h2>Objects</h2>
+<p>This API returns additionally to the gigs and venues object some controll object. The are returned on specific kinds
+    of
+    request or if an error occured.</p>
+
+<a NAME="Errorobject"></a>
+<h3>Errorobject</h3>
+<p>The Errorobject is returned if something went wrong. You can use this to show some additional information about what
+    went wrong. Also the http errorcode is set appropriatly. So you can get the additional information if the http code
+    is
+    not 200 OK.</p>
+<p>It contains an <code>error</code> member indecating what kind of error occured. Contains a <code>msg</code> member
+    containing a short
+    description of what went wrong in english.</p>
+
+<p><b>Generalerrors</b> are indicated by <code>general_error</code>. The msg is containing what was the problem.</p>
+<p><b>Autherrors</b> are indicated by <code>auth_error</code> and in combination with http code 403.</p>
+
+<a NAME="Successobject"></a>
+<h3>Successobject</h3>
+<p>is containing a <code>success</code> member with a short description about the success. Can be displayed to show the
+    user everything is right. But is only in english.</p>
+
+
+<a NAME="Testobject"></a>
+<h3>Testobject</h3>
+<p>is containing a <code>result</code> member writing <code>passed</code> or <code>failed</code>.</p>
+
+<h2>ToDos</h2>
+<ul>
+    <li>Add contacts per venue</li>
+    <li>A notes field for notes per gig, venue etc. Only logged in viewable</li>
+</ul>
+
+
+<h2>Changelog</h2>
+<h3>2016_04_09</h3>
+<ul>
+    <li>Implement with the propel orm-framework for better abstraction from database.</li>
+    <li>Implement basic architecture</li>
+</ul>
+
+<h3>2016_02_07</h3>
+Advantages over the last version (apiv2) are of many kinds. A new database structure is used and gives the possibility
+to extend it for performing more complex analytics. Also the new structure is in general more extenable and contains
+more information. Seperate tables for venues, contacts and even users are established. The apiv3 is also using the
+modern design called RESTful to give an easy to learn interface. apiv2 is using only the http GET method to get and to
+set objects. Changes are made via the GET parameters. In the new version all different kinds of http methods are
+supported and used! Change are made via the body of the request. Also the implementation is refactored. The database is
+abstracted with PDO. To implement routes the Slim 3 framework is used. Different functionalities are implement via DI
+and middleware components which gives a more cleaner codebase. Most parts of the documentation is generated
+automatically from source files and can be build in html and pdf format. Important function of the codebase are tested
+via PhpUnittests. The codebase is opensource and public at github. Feel free to write Issues and Bugs it the repository!
+<h3>2016_01_17</h3>
+<ul>
+    <li>New design for help page</li>
+    <li>Using prepared statements</li>
+    <li>New database structure</li>
+</ul>
+</body>
 
 </html>
