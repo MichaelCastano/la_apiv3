@@ -1,13 +1,13 @@
 # Introduction
-This is a api for managing gigs, orders and venues for bands, especially my own band lieber anders!
+This is a api for managing gigs, orders and venues for bands, especially my own band [Lieber Anders]!
 
 # Installation
 To be written
 
 # Building
-Use `php composer.phar install` to install all dependencies.
+Use `php composer.phar install` to install all dependencies.See [Composer]
 
-Use `vendor/bin/propel sql:build` to generate sql maps.
+Use `vendor/bin/propel sql:build` to generate sql maps. See [Propel]
 
 Use `vendor/bin/probel model:build` to generate the ORM-Objects.
 
@@ -20,8 +20,12 @@ Use `php composer.phar dump-autoload` to generate the autoload scripts.
 This software is licenced under GPLv2.
 
 #Credits
-Credit go to:
-+ Slim: For a fantastic RESTful framework
-+ Propel: For ORM
+Credits go to:
++ [Slim]
++ [Propel]
 
-Thanks!
+
+[Slim]: http://www.slimframework.com/ "Slim"
+[Propel]: http://propelorm.org/ "Propel"
+[Composer]: https://getcomposer.org/ "Composer"
+[Lieber Anders]: http://lieber-anders.de/ "Lieber Anders"
